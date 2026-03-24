@@ -97,7 +97,7 @@ python main.py 8.8.8.8 --no-save
 
 ## Example Output
 
-![IOC Checker Demo](https://github.com/user-attachments/assets/924d74c8-97bf-4088-aba6-25cba8671eab)
+![IOC Checker Demo](https://github.com/user-attachments/assets/abb83bab-dc7f-4945-badb-8cd9b856ebb3)(https://github.com/user-attachments/assets/27480dca-1974-45ec-852d-7232dcdc4793)
 
 ```
 
