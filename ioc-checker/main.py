@@ -24,12 +24,10 @@ from pathlib import Path
 from dotenv import load_dotenv
 from rich.console import Console
 from rich.panel import Panel
-from rich.table import Table
-from rich import box
 
 from ioc_checker.classifier import classify_ioc
 from ioc_checker import virustotal, abuseipdb, shodan_lookup
-from ioc_checker.verdict import render_verdict, get_verdict_label
+from ioc_checker.verdict import render_verdict
 
 # Load API keys from .env file
 load_dotenv()
@@ -92,14 +90,13 @@ def run_single(ioc: str) -> dict:
         console.print("[dim]Querying VirusTotal...[/dim]")
         results["virustotal"] = virustotal.check_url(ioc)
 
-    # Render verdict tables in terminal and capture verdict label
-    verdict = render_verdict(results, ioc_type)
+    # Render verdict tables in terminal
+    render_verdict(results, ioc_type)
 
     # Attach metadata for JSON report
     results["_meta"] = {
         "ioc": ioc,
         "type": ioc_type,
-        "verdict": verdict,
         "timestamp": datetime.now(timezone.utc).isoformat()
     }
 
@@ -127,66 +124,10 @@ def run_batch(filepath: str):
         sys.exit(1)
 
     console.print(f"[cyan]📋 Batch mode: {len(iocs)} IOCs loaded from {filepath}[/cyan]\n")
-
-    # Track results for summary table
-    summary = []
-
     for ioc in iocs:
         results = run_single(ioc)
         if results:
             save_report(ioc, results)
-            verdict = results.get("_meta", {}).get("verdict", "UNKNOWN")
-            ioc_type = results.get("_meta", {}).get("type", "UNKNOWN")
-            summary.append((ioc, ioc_type, verdict))
-        else:
-            summary.append((ioc, "UNKNOWN", "ERROR"))
-
-    # Print batch summary table
-    _render_batch_summary(summary)
-
-
-def _render_batch_summary(summary: list):
-    """Render a final summary table after batch processing completes."""
-    console.print()
-    console.rule("[bold cyan]  BATCH SUMMARY  ")
-    console.print()
-
-    table = Table(box=box.ROUNDED, show_header=True, header_style="bold cyan")
-    table.add_column("#",       style="dim",   width=4)
-    table.add_column("IOC",     style="white", no_wrap=False, max_width=50)
-    table.add_column("Type",    style="cyan",  width=10)
-    table.add_column("Verdict", width=12)
-
-    # Counters for the footer stats
-    counts = {"MALICIOUS": 0, "SUSPICIOUS": 0, "CLEAN": 0, "ERROR": 0, "UNKNOWN": 0}
-
-    for i, (ioc, ioc_type, verdict) in enumerate(summary, start=1):
-        # Colour code the verdict cell
-        if verdict == "MALICIOUS":
-            verdict_cell = "[bold red]🔴 MALICIOUS[/bold red]"
-        elif verdict == "SUSPICIOUS":
-            verdict_cell = "[bold yellow]🟡 SUSPICIOUS[/bold yellow]"
-        elif verdict == "CLEAN":
-            verdict_cell = "[bold green]🟢 CLEAN[/bold green]"
-        else:
-            verdict_cell = f"[dim]{verdict}[/dim]"
-
-        table.add_row(str(i), ioc, ioc_type, verdict_cell)
-        counts[verdict] = counts.get(verdict, 0) + 1
-
-    console.print(table)
-    console.print()
-
-    # Stats footer
-    total = len(summary)
-    console.print(
-        f"  [bold]Total:[/bold] {total}  |  "
-        f"[red]Malicious: {counts['MALICIOUS']}[/red]  |  "
-        f"[yellow]Suspicious: {counts['SUSPICIOUS']}[/yellow]  |  "
-        f"[green]Clean: {counts['CLEAN']}[/green]  |  "
-        f"[dim]Errors: {counts.get('ERROR', 0) + counts.get('UNKNOWN', 0)}[/dim]"
-    )
-    console.print()
 
 
 def main():

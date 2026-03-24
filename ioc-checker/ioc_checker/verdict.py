@@ -6,11 +6,6 @@ from rich.text import Text
 console = Console()
 
 
-def get_verdict_label(malicious: int, total: int, abuse_score: int = 0, cves: list = []) -> tuple:
-    """Public wrapper — returns (verdict_str, color_str). Used by main.py for batch summary."""
-    return _verdict_label(malicious, total, abuse_score, cves)
-
-
 def _verdict_label(malicious: int, total: int, abuse_score: int = 0, cves: list = []) -> tuple:
     """
     Determine verdict based on aggregated signals:
@@ -62,6 +57,7 @@ def render_verdict(results: dict, ioc_type: str):
     console.print()
     console.rule(f"[{color}]  VERDICT: {verdict}  ")
     console.print()
+
     # ── VirusTotal Table ────────────────────────────────────────────
     if vt:
         vt_table = Table(title="VirusTotal", box=box.SIMPLE_HEAVY, show_header=True)
@@ -145,4 +141,3 @@ def render_verdict(results: dict, ioc_type: str):
         console.print(sh_table)
 
     console.print()
-    return verdict
