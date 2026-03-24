@@ -181,6 +181,6 @@ This tool is intended for **educational purposes and authorised defensive securi
 
 ## Author
 
-**Your Name**
+**Emmanuel Chang**
 Information Security Student
-[GitHub](https://github.com/YOUR_USERNAME) | [LinkedIn](https://linkedin.com/in/YOUR_PROFILE)
+[GitHub](https://github.com/Emmanuelchang2006) | [LinkedIn](www.linkedin.com/in/emmanuel-chang)
