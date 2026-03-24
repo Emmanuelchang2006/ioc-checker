@@ -97,37 +97,8 @@ python main.py 8.8.8.8 --no-save
 
 ## Example Output
 
-```
-╭──────────────────────────────────────────╮
-│  🔍 IOC Checker                          │
-│  185.220.101.45                          │
-│  Type: IP                                │
-╰──────────────────────────────────────────╯
+![IOC Checker Demo](https://github.com/user-attachments/assets/924d74c8-97bf-4088-aba6-25cba8671eab)
 
-════════════════  VERDICT: MALICIOUS  ════════════════
-
-VirusTotal
-  Detections    18/94 engines flagged
-  Suspicious    2
-  Country       DE
-  Owner/ASN     Frantech Solutions
-  Reputation    -98
-
-AbuseIPDB
-  Abuse Score   97%
-  Total Reports 1,842
-  ISP           Frantech Solutions
-  Usage Type    TOR Proxy
-  Is TOR        YES
-  Last Reported 2024-01-15T08:22:11Z
-
-Shodan
-  Org           Frantech Solutions
-  Open Ports    443, 9001, 9030
-  Tags          tor, anonymous
-  CVEs Found    CVE-2023-44487 (CVSS: 7.5)
-
-📄 Report saved: reports/185_220_101_45_20240115_082300.json
 ```
 
 ---
@@ -181,6 +152,6 @@ This tool is intended for **educational purposes and authorised defensive securi
 
 ## Author
 
-**Your Name**
+**Emmanuel Chang**
 Information Security Student
-[GitHub](https://github.com/YOUR_USERNAME) | [LinkedIn](https://linkedin.com/in/YOUR_PROFILE)
+[GitHub](https://github.com/Emmanuelchang2006) | [LinkedIn](www.linkedin.com/in/emmanuel-chang)

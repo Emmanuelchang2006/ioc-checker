@@ -1,0 +1,5 @@
+# Test batch
+8.8.8.8
+185.220.101.45
+malicious-domain.com
+44d88612fea8a8f36de82e1278abb02f
