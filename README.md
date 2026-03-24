@@ -1,10 +1,5 @@
 # 🔍 IOC Checker — Threat Intelligence Triage Tool
 
-![Python](https://img.shields.io/badge/Python-3.8+-blue?style=flat-square&logo=python)
-![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
-![Status](https://img.shields.io/badge/Status-Active-brightgreen?style=flat-square)
-![Blue Team](https://img.shields.io/badge/Team-Blue-0078D4?style=flat-square)
-
 A command-line threat intelligence triage tool that enriches **Indicators of Compromise (IOCs)** against multiple open-source intelligence (OSINT) sources. Built to replicate the IOC enrichment workflow performed by **SOC Tier 1 analysts** during alert triage.
 
 ## Background
